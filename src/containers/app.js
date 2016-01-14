@@ -17,7 +17,7 @@ class App extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
-    this.handleResize();
+    setTimeout(() => this.handleResize(), 300);
   }
 
   componentWillUnmount() {

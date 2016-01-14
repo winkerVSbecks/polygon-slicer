@@ -51,15 +51,18 @@ export default Canvas;
  */
 let swipe = [];
 function mouse(e, cb, swiping) {
+  e.preventDefault();
   cb(e.clientX, e.clientY, swiping);
 }
 
 function touchStart(e, cb, swiping) {
+  e.preventDefault();
   const touch = e.targetTouches[0];
   cb(touch.clientX, touch.clientY, swiping);
 }
 
 function touchEnd(e, cb, swiping) {
+  e.preventDefault();
   const touch = e.changedTouches[0];
   cb(touch.clientX, touch.clientY, swiping);
 }

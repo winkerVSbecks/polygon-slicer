@@ -1,0 +1,10 @@
+Polygon Slicer
+
+Slice up some convex polygons.
+
+To run:
+
+  $ npm install
+  $ npm run dev
+
+View at: http://winkervsbecks.github.io/polygon-slicer

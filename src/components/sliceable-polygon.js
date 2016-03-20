@@ -2,17 +2,9 @@ import React from 'react';
 import clrs from '../styles/clrs';
 import {aperture} from 'ramda';
 import Markers from './markers';
-import Line from './line';
 import { getIntersections, split } from '../utils/slicer';
 
 const SliceablePolygon = ({ poly, line }) => {
-  if (!line.x2 || !line.y2) {
-    return (
-      <polygon points={ poly.join(' ') }
-        fill={ clrs.blue } />
-    );
-  }
-
   const intersections = getIntersections(poly, line);
   const sides = [
     ...aperture(2, poly),
@@ -26,7 +18,6 @@ const SliceablePolygon = ({ poly, line }) => {
       <g>
         <polygon points={ poly.join(' ') }
           fill={ clrs.blue } />
-        <Line def={ line } />
         <Markers intersections={ intersections } />
       </g>
     );
@@ -44,7 +35,6 @@ const SliceablePolygon = ({ poly, line }) => {
   return (
     <g>
       { chunkPolys }
-      <Line def={ line } />
       <Markers intersections={ intersections } />
     </g>
   );

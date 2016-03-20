@@ -4,6 +4,10 @@ import {shape, intersect} from 'svg-intersections';
  * Slicer
  */
 export function getIntersections(poly, line) {
+  if (!line.x2 || !line.y2) {
+    return [];
+  }
+
   return intersect(
     shape('polygon', { points: poly.join(' ') }),
     shape('line', line)

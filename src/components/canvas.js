@@ -1,5 +1,6 @@
 import React from 'react';
 import SliceablePolygon from '../components/sliceable-polygon';
+import Line from './line';
 
 /**
  * SVG Canvas
@@ -42,6 +43,7 @@ const Canvas = ({ w, h, line, swiping, onStart, onMove, onEnd }) => {
       onTouchEnd={ handleTouchEnd }
       onMouseUp={ handleMouseUp }>
       <SliceablePolygon poly={ poly } line={ line } />
+      <Line def={ line } />
     </svg>
   );
 };

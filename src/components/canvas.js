@@ -8,16 +8,16 @@ import SliceablePolygon from '../components/sliceable-polygon';
  */
 const Canvas = ({ w, h, line, swiping, onStart, onMove, onEnd }) => {
   // Start
-  const handleTouchStart = e => touchStart(e, onStart, true);
-  const handleMouseDown = e => mouse(e, onStart, true);
+  const handleTouchStart = e => touchStart(e, onStart);
+  const handleMouseDown = e => mouse(e, onStart);
   // Move
   const handleMouseMove = e => {
-    if (swiping) { mouse(e, onMove, true); }
+    if (swiping) { mouse(e, onMove); }
   };
-  const handleTouchMove = e => touchStart(e, onMove, true);
+  const handleTouchMove = e => touchStart(e, onMove);
   // End
-  const handleTouchEnd = e => touchEnd(e, onEnd, false);
-  const handleMouseUp = e => mouse(e, onEnd, false);
+  const handleTouchEnd = e => touchEnd(e, onEnd);
+  const handleMouseUp = e => mouse(e, onEnd);
 
   const viewBox = [0, 0, w, h].join(' ');
   const poly = [
@@ -62,19 +62,19 @@ export default Canvas;
 /**
  * Events
  */
-function mouse(e, cb, swiping) {
+function mouse(e, cb) {
   e.preventDefault();
-  cb(e.clientX, e.clientY, swiping);
+  cb(e.clientX, e.clientY);
 }
 
-function touchStart(e, cb, swiping) {
+function touchStart(e, cb) {
   e.preventDefault();
   const touch = e.targetTouches[0];
-  cb(touch.clientX, touch.clientY, swiping);
+  cb(touch.clientX, touch.clientY);
 }
 
-function touchEnd(e, cb, swiping) {
+function touchEnd(e, cb) {
   e.preventDefault();
   const touch = e.changedTouches[0];
-  cb(touch.clientX, touch.clientY, swiping);
+  cb(touch.clientX, touch.clientY);
 }

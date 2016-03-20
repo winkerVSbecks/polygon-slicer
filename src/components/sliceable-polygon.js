@@ -2,6 +2,7 @@ import React from 'react';
 import {shape, intersect} from 'svg-intersections';
 import clrs from '../styles/clrs';
 import {aperture} from 'ramda';
+import Markers from './markers';
 
 const SliceablePolygon = ({ poly, line }) => {
   if (!line.x2 || !line.y2) {
@@ -12,8 +13,6 @@ const SliceablePolygon = ({ poly, line }) => {
   }
 
   const intersections = getIntersections(poly, line);
-
-  const markers = getMarkers(intersections);
   const sides = [
     ...aperture(2, poly),
     [poly[poly.length - 1], poly[0]],
@@ -30,7 +29,7 @@ const SliceablePolygon = ({ poly, line }) => {
           x2={ line.x2 } y2={ line.y2 }
           strokeWidth={ 2 }
           stroke={ clrs.yellow } />
-        { markers }
+        <Markers intersections={ intersections } />
       </g>
     );
   }
@@ -51,7 +50,7 @@ const SliceablePolygon = ({ poly, line }) => {
         x2={ line.x2 } y2={ line.y2 }
         strokeWidth={ 2 }
         stroke={ clrs.yellow } />
-      { markers }
+      <Markers intersections={ intersections } />
     </g>
   );
 };
@@ -72,19 +71,6 @@ function getIntersections(poly, line) {
     shape('polygon', { points: poly.join(' ') }),
     shape('line', line)
   ).points;
-}
-
-function getMarkers(intersections) {
-  return intersections.map((pt, idx) => {
-    return (
-      <circle cx={ pt.x } cy={ pt.y }
-        r={ 6 }
-        stroke={ clrs.purple }
-        strokeWidth={ 2 }
-        fill="none"
-        key={ idx } />
-    );
-  });
 }
 
 function containsIntersection(side, i) {

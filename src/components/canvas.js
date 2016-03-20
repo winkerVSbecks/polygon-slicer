@@ -1,13 +1,13 @@
 import React from 'react';
-import SliceablePolygon from '../components/sliceable-polygon';
 import Line from './line';
+import Polygons from './polygons';
 
 /**
  * SVG Canvas
  * This component generates the base SVG
  * and sets up all the sub-components
  */
-const Canvas = ({ w, h, line, swiping, onStart, onMove, onEnd }) => {
+const Canvas = ({ w, h, line, swiping, onStart, onMove, onEnd, polygons }) => {
   // Start
   const handleTouchStart = e => touchStart(e, onStart);
   const handleMouseDown = e => mouse(e, onStart);
@@ -21,14 +21,6 @@ const Canvas = ({ w, h, line, swiping, onStart, onMove, onEnd }) => {
   const handleMouseUp = e => mouse(e, onEnd);
 
   const viewBox = [0, 0, w, h].join(' ');
-  const poly = [
-    [240 * w / 480, 80 * h / 480],
-    [350 * w / 480, 200 * h / 480],
-    [400 * w / 480, 320 * h / 480],
-    [300 * w / 480, 450 * h / 480],
-    [240 * w / 480, 400 * h / 480],
-    [80 * w / 480, 320 * h / 480],
-  ];
 
   return (
     <svg version="1.1"
@@ -42,7 +34,7 @@ const Canvas = ({ w, h, line, swiping, onStart, onMove, onEnd }) => {
       onTouchMove={ handleTouchMove }
       onTouchEnd={ handleTouchEnd }
       onMouseUp={ handleMouseUp }>
-      <SliceablePolygon poly={ poly } line={ line } />
+      <Polygons polygons={ polygons } line={ line } />
       <Line def={ line } />
     </svg>
   );
@@ -56,6 +48,7 @@ Canvas.propTypes = {
   onEnd: React.PropTypes.func,
   line: React.PropTypes.object,
   swiping: React.PropTypes.bool,
+  polygons: React.PropTypes.array,
 };
 
 export default Canvas;

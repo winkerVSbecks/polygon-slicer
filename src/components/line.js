@@ -1,6 +1,9 @@
 import React from 'react';
 import clrs from '../styles/clrs';
 
+/**
+ * Line
+ */
 const Line = ({ def }) => {
   if (def.x1 && def.x2 && def.y1 && def.y2) {
     return (

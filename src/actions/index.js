@@ -3,6 +3,7 @@ import {
   TOUCH_START,
   TOUCH_MOVE,
   TOUCH_END,
+  INITIALIZE,
 } from '../constants';
 import { partial } from 'ramda';
 
@@ -23,3 +24,11 @@ function touch(type, x, y) {
 export const touchStart = partial(touch, [TOUCH_START]);
 export const touchMove = partial(touch, [TOUCH_MOVE]);
 export const touchEnd = partial(touch, [TOUCH_END]);
+
+export function initializePolygon() {
+  return (dispatch, getState) => {
+    const w = getState().canvas.get('w');
+    const h = getState().canvas.get('h');
+    dispatch({ type: INITIALIZE, w, h });
+  };
+}

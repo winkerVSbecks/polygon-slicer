@@ -15,7 +15,7 @@ const INITIAL_STATE = fromJS({
   swiping: false,
 });
 
-function counterReducer(state = INITIAL_STATE, action = {}) {
+function canvasReducer(state = INITIAL_STATE, action = {}) {
   switch (action.type) {
   case WINDOW_RESIZE:
     return state.mergeDeep({
@@ -59,7 +59,7 @@ function counterReducer(state = INITIAL_STATE, action = {}) {
   }
 }
 
-export default counterReducer;
+export default canvasReducer;
 
 function getLocation(state, l) {
   const x = l.x * state.get('w') / state.get('width');

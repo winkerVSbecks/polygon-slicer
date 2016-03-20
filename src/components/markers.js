@@ -1,6 +1,9 @@
 import React from 'react';
 import clrs from '../styles/clrs';
 
+/**
+ * Intersection Markers
+ */
 const Markers = ({ intersections }) => {
   return (
     <g>

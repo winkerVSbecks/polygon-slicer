@@ -3,6 +3,7 @@ import {shape, intersect} from 'svg-intersections';
 import clrs from '../styles/clrs';
 import {aperture} from 'ramda';
 import Markers from './markers';
+import Line from './line';
 
 const SliceablePolygon = ({ poly, line }) => {
   if (!line.x2 || !line.y2) {
@@ -25,10 +26,7 @@ const SliceablePolygon = ({ poly, line }) => {
       <g>
         <polygon points={ poly.join(' ') }
           fill={ clrs.blue } />
-        <line x1={ line.x1 } y1={ line.y1 }
-          x2={ line.x2 } y2={ line.y2 }
-          strokeWidth={ 2 }
-          stroke={ clrs.yellow } />
+        <Line def={ line } />
         <Markers intersections={ intersections } />
       </g>
     );
@@ -46,10 +44,7 @@ const SliceablePolygon = ({ poly, line }) => {
   return (
     <g>
       { chunkPolys }
-      <line x1={ line.x1 } y1={ line.y1 }
-        x2={ line.x2 } y2={ line.y2 }
-        strokeWidth={ 2 }
-        stroke={ clrs.yellow } />
+      <Line def={ line } />
       <Markers intersections={ intersections } />
     </g>
   );

@@ -1,5 +1,6 @@
 import {
   INITIALIZE,
+  SLICE,
 } from '../constants';
 import { fromJS } from 'immutable';
 
@@ -18,6 +19,10 @@ function polygonsReducer(state = INITIAL_STATE, action = {}) {
       [240 * w / 480, 400 * h / 480],
       [80 * w / 480, 320 * h / 480],
     ]));
+
+  case SLICE:
+    const ns1 = state.delete(action.index);
+    return ns1.push(...fromJS(action.chunks));
 
   default:
     return state;

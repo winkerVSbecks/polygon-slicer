@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { List } from 'immutable';
 import {
   windowResize,
   touchStart,
   touchMove,
   touchEnd,
   initializePolygon,
+  slice,
 } from '../actions';
 import Canvas from '../components/canvas';
 
 function mapStateToProps(state) {
   return {
     canvas: state.canvas.toJS(),
-    polygons: state.polygons.toJS(),
+    polygons: state.polygons,
   };
 }
 
@@ -23,6 +25,7 @@ function mapDispatchToProps(dispatch) {
     touchMove: (x, y) => dispatch(touchMove(x, y)),
     touchEnd: (x, y) => dispatch(touchEnd(x, y)),
     initializePolygon: () => dispatch(initializePolygon()),
+    slice: (idx, chunks) => dispatch(slice(idx, chunks)),
   };
 }
 
@@ -46,7 +49,8 @@ class App extends Component {
         polygons={ this.props.polygons }
         onStart={ this.props.touchStart }
         onMove={ this.props.touchMove }
-        onEnd={ this.props.touchEnd } />
+        onEnd={ this.props.touchEnd }
+        slice={ this.props.slice } />
     );
   }
 
@@ -62,12 +66,13 @@ class App extends Component {
 App.propTypes = {
   children: React.PropTypes.node,
   canvas: React.PropTypes.object,
-  polygons: React.PropTypes.array,
+  polygons: React.PropTypes.instanceOf(List),
   windowResize: React.PropTypes.func,
   touchStart: React.PropTypes.func,
   touchMove: React.PropTypes.func,
   touchEnd: React.PropTypes.func,
   initializePolygon: React.PropTypes.func,
+  slice: React.PropTypes.func,
 };
 
 export default connect(

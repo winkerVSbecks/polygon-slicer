@@ -1,4 +1,5 @@
 import React from 'react';
+import { List } from 'immutable';
 import Line from './line';
 import Polygons from './polygons';
 
@@ -7,7 +8,13 @@ import Polygons from './polygons';
  * This component generates the base SVG
  * and sets up all the sub-components
  */
-const Canvas = ({ w, h, line, swiping, onStart, onMove, onEnd, polygons }) => {
+const Canvas = ({
+  w, h,
+  line, polygons,
+  swiping,
+  onStart, onMove, onEnd,
+  slice,
+}) => {
   // Start
   const handleTouchStart = e => touchStart(e, onStart);
   const handleMouseDown = e => mouse(e, onStart);
@@ -34,7 +41,7 @@ const Canvas = ({ w, h, line, swiping, onStart, onMove, onEnd, polygons }) => {
       onTouchMove={ handleTouchMove }
       onTouchEnd={ handleTouchEnd }
       onMouseUp={ handleMouseUp }>
-      <Polygons polygons={ polygons } line={ line } />
+      <Polygons polygons={ polygons } line={ line } slice={ slice } />
       <Line def={ line } />
     </svg>
   );
@@ -48,7 +55,8 @@ Canvas.propTypes = {
   onEnd: React.PropTypes.func,
   line: React.PropTypes.object,
   swiping: React.PropTypes.bool,
-  polygons: React.PropTypes.array,
+  polygons: React.PropTypes.instanceOf(List),
+  slice: React.PropTypes.func,
 };
 
 export default Canvas;

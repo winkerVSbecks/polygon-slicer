@@ -4,6 +4,7 @@ import {
   TOUCH_MOVE,
   TOUCH_END,
   INITIALIZE,
+  SLICE,
 } from '../constants';
 import { partial } from 'ramda';
 
@@ -31,4 +32,8 @@ export function initializePolygon() {
     const h = getState().canvas.get('h');
     dispatch({ type: INITIALIZE, w, h });
   };
+}
+
+export function slice(idx, chunks) {
+  return { type: SLICE, idx, chunks };
 }

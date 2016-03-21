@@ -7,8 +7,8 @@ import { getIntersections, split } from '../utils/slicer';
 class SliceablePolygon extends Component {
 
   componentDidUpdate() {
-    // const { key, slice } = this.props;
-    // slice(key);
+    // const { index, slice } = this.props;
+    // slice(index);
   }
 
   render() {
@@ -55,7 +55,7 @@ SliceablePolygon.propTypes = {
   poly: React.PropTypes.array,
   line: React.PropTypes.object,
   slice: React.PropTypes.func,
-  key: React.PropTypes.number,
+  index: React.PropTypes.number,
 };
 
 export default SliceablePolygon;

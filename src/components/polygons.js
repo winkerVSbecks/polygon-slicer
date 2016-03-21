@@ -15,6 +15,7 @@ const Polygons = ({ line, polygons, slice }) => {
               poly={ poly.toJS() }
               line={ line }
               slice={ slice }
+              index={ idx }
               key={ idx } />
           ))
         }

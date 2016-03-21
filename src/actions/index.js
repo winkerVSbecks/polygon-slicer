@@ -34,6 +34,6 @@ export function initializePolygon() {
   };
 }
 
-export function slice(idx, chunks) {
-  return { type: SLICE, idx, chunks };
+export function slice(index, chunks) {
+  return { type: SLICE, index, chunks };
 }

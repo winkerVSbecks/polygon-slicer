@@ -1,8 +1,25 @@
 import React, { Component } from 'react';
 import clrs from '../styles/clrs';
-import {aperture} from 'ramda';
 import Markers from './markers';
+import {aperture} from 'ramda';
 import { getIntersections, split } from '../utils/slicer';
+
+// class SliceablePolygon extends Component {
+//
+//
+//   render() {
+//     const { poly } = this.props;
+//     return (
+//       <g>
+//         <polygon
+//           points={ poly.join(' ') }
+//           fill={ clrs.blue }
+//           stroke={ clrs.purple } />
+//       </g>
+//     );
+//   }
+//
+// }
 
 class SliceablePolygon extends Component {
 
@@ -26,7 +43,8 @@ class SliceablePolygon extends Component {
         <g>
           <polygon
             points={ poly.join(' ') }
-            fill={ clrs.blue } />
+            fill={ clrs.blue }
+            stroke={ clrs.purple } />
           <Markers intersections={ intersections } />
         </g>
       );

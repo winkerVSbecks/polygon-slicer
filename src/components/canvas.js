@@ -32,8 +32,7 @@ const Canvas = ({
   return (
     <svg version="1.1"
       xmlns="http://www.w3.org/2000/svg"
-      width="100%"
-      height="100%"
+      className="block vh-100 vw-100"
       viewBox={ viewBox }
       onTouchStart={ handleTouchStart }
       onMouseDown={ handleMouseDown }

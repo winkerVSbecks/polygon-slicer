@@ -45,11 +45,13 @@ function canvasReducer(state = INITIAL_STATE, action = {}) {
     });
 
   case TOUCH_END:
-    const tail = getLocation(state, action.location);
+    // const tail = getLocation(state, action.location);
     return state.mergeDeep({
       line: {
-        x2: tail.x,
-        y2: tail.y,
+        x1: undefined,
+        y1: undefined,
+        x2: undefined,
+        y2: undefined,
       },
       swiping: false,
     });

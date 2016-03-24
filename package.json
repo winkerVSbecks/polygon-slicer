@@ -77,7 +77,6 @@
     "jsdom": "^8.1.0",
     "json-loader": "^0.5.3",
     "mocha": "^2.3.3",
-    "point-on-line": "^1.0.0",
     "postcss-cssnext": "^2.4.0",
     "postcss-import": "^8.0.2",
     "postcss-loader": "^0.8.0",

@@ -7,6 +7,7 @@ import {
   SLICE,
 } from '../constants';
 import { partial } from 'ramda';
+import { getSlicedChuncks } from '../utils/slicer';
 
 export function windowResize({ width, height }) {
   const w = width >= height ? 1200 : width * 1200 / height;
@@ -24,7 +25,6 @@ function touch(type, x, y) {
 
 export const touchStart = partial(touch, [TOUCH_START]);
 export const touchMove = partial(touch, [TOUCH_MOVE]);
-// export const touchEnd = partial(touch, [TOUCH_END]);
 
 export function touchEnd(x, y) {
   return (dispatch, getState) => {
@@ -32,13 +32,13 @@ export function touchEnd(x, y) {
     const line = canvas.get('line').toJS();
 
     const payload = polygons.asMutable().reduce((res, polygon, index) => {
-      const chunks = chunkItUp(polygon.toJS(), line);
-      console.log(polygon.toJS());
-      console.log(chunks);
+      const chunks = getSlicedChuncks(polygon.toJS(), line);
+
       if (chunks) {
         res.toDelete.push(index);
-        res.toAdd.push(...[chunks.chunk1, chunks.chunk2]);
+        res.toAdd.push(...chunks);
       }
+
       return res;
     }, { toDelete: [], toAdd: [] });
 
@@ -60,29 +60,4 @@ export function initializePolygon() {
     const h = getState().canvas.get('h');
     dispatch({ type: INITIALIZE, w, h });
   };
-}
-
-export function slice(index, chunks) {
-  return dispatch({
-    type: SLICE,
-    index,
-    chunks: [chunks.chunk1, chunks.chunk2],
-  });
-}
-
-/**
- * TEST
- */
-import { getIntersections, split } from '../utils/slicer';
-import {aperture} from 'ramda';
-
-export function chunkItUp(poly, line) {
-  const intersections = getIntersections(poly, line);
-  const sides = [
-    ...aperture(2, poly),
-    [poly[poly.length - 1], poly[0]],
-  ];
-
-  const isValidIntersection = intersections.length === 2;
-  return isValidIntersection ? split(sides, intersections) : null;
 }

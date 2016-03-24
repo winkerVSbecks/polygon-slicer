@@ -13,6 +13,11 @@ function polygonsReducer(state = INITIAL_STATE, action = {}) {
   case INITIALIZE:
     return state.push(...fromJS([
       [
+        [0.9 * 500, 0.25 * 500],
+        [0.8 * 500, 0.75 * 500],
+        [1 * 500, 0.75 * 500],
+      ],
+      [
         [0.5 * 500, 0.25 * 500],
         [0.75 * 500, 0.25 * 500],
         [0.75 * 500, 0.75 * 500],

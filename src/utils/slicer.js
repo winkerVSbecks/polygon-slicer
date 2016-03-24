@@ -23,6 +23,7 @@ export function split(sides, line) {
   }
 
   let chunk1Active = false;
+  let intersectionCount = 0;
 
   const chunks = sides.reduce((res, side) => {
     const intersection = getIntersections(side, line);
@@ -32,6 +33,7 @@ export function split(sides, line) {
         res[0].push(...[side[0], intersection]);
         res[1].push(...[intersection, side[1]]);
         chunk1Active = true;
+        intersectionCount++;
       } else {
         res[0].push(...side);
       }
@@ -40,6 +42,7 @@ export function split(sides, line) {
         res[1].push(...[side[0], intersection]);
         res[0].push(...[intersection, side[1]]);
         chunk1Active = false;
+        intersectionCount++;
       } else {
         res[1].push(...side);
       }
@@ -48,7 +51,9 @@ export function split(sides, line) {
     return res;
   }, [[], []]);
 
-  return chunks[1].length > 0 ? chunks : undefined;
+  return chunks[1].length > 0 && intersectionCount === 2 ?
+    chunks :
+    undefined;
 }
 
 export function getSlicedChuncks(poly, line) {
